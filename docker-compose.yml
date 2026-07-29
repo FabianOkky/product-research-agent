@@ -1,0 +1,36 @@
+# Docker Compose — PostgreSQL lokal untuk Product Research Agent
+# Menggantikan Supabase supaya development tidak bergantung layanan cloud.
+#
+#   Start DB   : docker compose up -d
+#   Lihat log  : docker compose logs -f postgres
+#   Stop       : docker compose down            (data AMAN, tetap di volume 'pgdata')
+#   Hapus data : docker compose down -v         (HATI-HATI: menghapus SEMUA data DB)
+#
+# Kredensial dibaca otomatis dari file .env (DB_DATABASE/DB_USERNAME/DB_PASSWORD),
+# jadi satu sumber kebenaran dengan Laravel.
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: pra-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-product_research}
+      POSTGRES_USER: ${DB_USERNAME:-laravel}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
+    ports:
+      # Host port diambil dari DB_PORT di .env (default 5432); container tetap 5432.
+      # Di mesin dev ini DB_PORT=5544 karena 5432/5433/5434 sudah dipakai Postgres/servis
+      # lain. Jadi .env = satu-satunya sumber kebenaran untuk port.
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-laravel} -d ${DB_DATABASE:-product_research}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  pgdata:
+    driver: local

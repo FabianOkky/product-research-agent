@@ -100,7 +100,7 @@ seconds and renders the report once it's `done` (or a friendly error if it `fail
 | UI | Livewire 4 + Flux UI 2 + Tailwind CSS 4 |
 | AI | Laravel AI SDK (`laravel/ai`) → Google Gemini (`gemini-2.5-flash`) |
 | Search / Read | Serper (Google search API) + Jina Reader (no key) |
-| Database | PostgreSQL (Supabase) — SQLite for a quick local start |
+| Database | PostgreSQL — **local via Docker** for dev, any managed Postgres (e.g. Supabase) for deploy |
 | Queue | `database` driver + a `queue:work` worker |
 | Auth | Laravel Fortify (from the starter kit) |
 | Tests | Pest 4 — **99 tests** |
@@ -124,7 +124,7 @@ A quick tour of the app (all in Bahasa Indonesia):
 
 - **PHP 8.4+** and Composer
 - **Node.js 20+** and npm
-- A database: **Supabase Postgres** (free) _or_ local **SQLite**
+- **Docker Desktop** — runs the local PostgreSQL database via `docker compose`
 - Two API keys (both have generous free tiers — see below)
 
 ### Get the API keys (free)
@@ -150,28 +150,30 @@ php artisan key:generate
 
 ### Configure your environment
 
-Open `.env` and set at least the database and the two API keys:
+The database defaults already point to a **local PostgreSQL run by Docker**, so you only
+need to add the two API keys. Open `.env` and set:
 
 ```dotenv
-# --- Database: Supabase Postgres (recommended) ---
+# --- Database: local PostgreSQL via Docker (already the default) ---
 DB_CONNECTION=pgsql
-DB_HOST=your-project.pooler.supabase.com
-DB_PORT=5432
-DB_DATABASE=postgres
-DB_USERNAME=postgres.your-project
-DB_PASSWORD=your-password
+DB_HOST=127.0.0.1
+DB_PORT=5432            # change if port 5432 is already taken on your machine
+DB_DATABASE=product_research
+DB_USERNAME=laravel
+DB_PASSWORD=secret
 
-# --- ...or comment the block above and use SQLite for a quick start ---
-# DB_CONNECTION=sqlite        # then create the file: touch database/database.sqlite
-
-# --- Product Research Agent keys ---
+# --- Product Research Agent keys (add these) ---
 GEMINI_API_KEY=your-gemini-key
 SERPER_API_KEY=your-serper-key
 ```
 
-Then migrate and build the front-end assets:
+> Deploying instead of developing locally? Point `DB_*` at any managed Postgres
+> (e.g. Supabase) — see [DEPLOY.md](DEPLOY.md).
+
+Then start the database, run migrations, and build the front-end assets:
 
 ```bash
+docker compose up -d     # starts PostgreSQL in Docker (needs Docker Desktop running)
 php artisan migrate
 npm run build
 ```
