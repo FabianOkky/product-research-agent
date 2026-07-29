@@ -6,7 +6,9 @@ use App\Livewire\Research\History;
 use App\Livewire\Research\Show;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', function () {
+    return redirect()->route(auth()->check() ? 'dashboard' : 'login');
+})->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::livewire('dashboard', Dashboard::class)->name('dashboard');
