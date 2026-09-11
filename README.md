@@ -109,14 +109,42 @@ seconds and renders the report once it's `done` (or a friendly error if it `fail
 
 A quick tour of the app (all in Bahasa Indonesia):
 
-- **Dashboard** — at-a-glance status counts (total / done / running / failed) and your most
-  recent runs, with a one-click "Riset Baru".
-- **Riset Baru** (New Research) — a single textarea: describe your need in plain language.
-- **Hasil Riset** (Result) — the live progress tracker, then the 8-section report with a
-  comparison table and the list of sources.
-- **Riwayat** (History) — every run you've made, newest first, reopenable.
+**Dashboard** — at-a-glance status counts (total / done / running / failed) and your most
+recent runs, with a one-click "Riset Baru".
 
-> 💡 _Want screenshots in this README? Drop images into `docs/screenshots/` and link them here._
+![Dashboard](docs/screenshots/02-dashboard.png)
+
+**Riset Baru** (New Research) — a single textarea: describe your need in plain language.
+
+![Riset Baru](docs/screenshots/03-riset-baru.png)
+
+**Hasil Riset** (Result) — a live progress tracker while the pipeline runs...
+
+![Hasil Riset - progress tracker](docs/screenshots/07-hasil-riset-progress.png)
+
+...then the 8-section report with a comparison table and the list of sources once it's done.
+
+![Hasil Riset - laporan lengkap](docs/screenshots/06-hasil-riset-full.png)
+
+Failed runs show a friendly error with a one-click retry instead of a stack trace:
+
+![Hasil Riset - gagal dengan retry](docs/screenshots/08-hasil-riset-gagal.png)
+
+**Riwayat** (History) — every run you've made, newest first, reopenable.
+
+![Riwayat](docs/screenshots/04-riwayat.png)
+
+<details>
+<summary>More screens (login, hasil riset selesai)</summary>
+
+![Login](docs/screenshots/01-login.png)
+
+![Hasil Riset - selesai](docs/screenshots/05-hasil-riset-top.png)
+
+</details>
+
+> Screenshots use seeded example data — no real API calls were made to capture them, so
+> they cost no quota. See [docs/screenshots/](docs/screenshots/) for the full set.
 
 ## 🚀 Getting started
 
