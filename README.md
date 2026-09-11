@@ -124,22 +124,22 @@ recent runs, with a one-click "Riset Baru".
 
 ...then the 8-section report with a comparison table and the list of sources once it's done.
 
-![Hasil Riset - laporan lengkap](docs/screenshots/06-hasil-riset-full.png)
+![Hasil Riset - full report](docs/screenshots/06-hasil-riset-full.png)
 
 Failed runs show a friendly error with a one-click retry instead of a stack trace:
 
-![Hasil Riset - gagal dengan retry](docs/screenshots/08-hasil-riset-gagal.png)
+![Hasil Riset - failed, with retry](docs/screenshots/08-hasil-riset-gagal.png)
 
 **Riwayat** (History) — every run you've made, newest first, reopenable.
 
 ![Riwayat](docs/screenshots/04-riwayat.png)
 
 <details>
-<summary>More screens (login, hasil riset selesai)</summary>
+<summary>More screens (login, completed research result)</summary>
 
 ![Login](docs/screenshots/01-login.png)
 
-![Hasil Riset - selesai](docs/screenshots/05-hasil-riset-top.png)
+![Hasil Riset - completed](docs/screenshots/05-hasil-riset-top.png)
 
 </details>
 
